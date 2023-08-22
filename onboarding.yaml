@@ -8,7 +8,6 @@ paths:
   /students:
     get:
       summary: Récupérer les informations des étudiants
-      operationId: GetStudent
       responses:
         '200':
           description: Succès
@@ -24,9 +23,9 @@ paths:
           content:
             text/plain:
               example: Une erreur est survenue lors du traitement de la requête.
+
     post:
       summary: Ajouter un nouvel étudiant
-      operationId: AddStudent
       requestBody:
         required: true
         content:
@@ -50,111 +49,105 @@ paths:
           content:
             text/plain:
               example: Une erreur est survenue lors du traitement de la requête.
-  put:
-    summary: Update students
-    operationId: updateStudent
-    requestBody:
-      required: true
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              name:
-                type: string
-              birthdate:
-                type: string
-    responses:
-      '200':
-        description: Succès
+
+    put:
+      summary: Mettre à jour un étudiant
+      operationId: updateStudent
+      requestBody:
+        required: true
         content:
           application/json:
-            example:
-              message: Étudiant ajouté avec succès
-      '500':
-        description: Erreur serveur
-        content:
-          text/plain:
-            example: Une erreur est survenue lors du traitement de la requête.
-  delete:
-    summary: Supprimer un étudiant
-    operationId: DeleteStudent
-    requestBody:
-      required: true
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              name:
-                type: string
-              birthdate:
-                type: string
-    responses:
-      '200':
-        description: Succès
-        content:
-          application/json:
-            example:
-              message: Étudiant supprimé avec succès
-      '500':
-        description: Erreur serveur
-        content:
-          text/plain:
-            example: Une erreur est survenue lors du traitement de la requête.
-/teacher:
-  get:
-    summary: Récupérer les informations d'un professeur
-    operationId: GetTeacher
-    responses:
-      '200':
-        description: Succès
-        content:
-          application/json:
-            example:
-              teacher:
-                id: 1
-                nom: Tokimahery Ramarozaka
-                nom_matière: Algorithmique
-                code_matière: prog1
-                durée_matière: 50h
-      '500':
-        description: Erreur serveur
-        content:
-          text/plain:
-            example: Une erreur est survenue lors du traitement de la requête.
-  post:
-    summary: Ajouter un nouveau professeur
-    operationId: Addteacher
-    requestBody:
-      required: true
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              nom:
-                type: string
-              nom_matière:
-                type: string
-              code_matière:
-                type: string
-              durée_matière:
-                type: string
-    responses:
-      '200':
-        description: Succès
-        content:
-          application/json:
-            example:
-              message: Professeur ajouté avec succès
-      '500':
-        description: Erreur serveur
-        content:
-          text/plain:
-            example: Une erreur est survenue lors du traitement de la requête.
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+                birthdate:
+                  type: string
+      responses:
+        '200':
+          description: Succès
+          content:
+            application/json:
+              example:
+                message: Étudiant mis à jour avec succès
         '500':
           description: Erreur serveur
           content:
             text/plain:
               example: Une erreur est survenue lors du traitement de la requête.
+
+    delete:
+      summary: Supprimer un étudiant
+      operationId: deleteStudent
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Succès
+          content:
+            application/json:
+              example:
+                message: Étudiant supprimé avec succès
+        '500':
+          description: Erreur serveur
+          content:
+            text/plain:
+              example: Une erreur est survenue lors du traitement de la requête.
+
+  /teacher:
+    get:
+      summary: Récupérer les informations d'un professeur
+      responses:
+        '200':
+          description: Succès
+          content:
+            application/json:
+              example:
+                teacher:
+                  id: 1
+                  nom: Tokimahery Ramarozaka
+                  nom_matière: Algorithmique
+                  code_matière: prog1
+                  durée_matière: 50h
+        '500':
+          description: Erreur serveur
+          content:
+            text/plain:
+              example: Une erreur est survenue lors du traitement de la requête.
+    post:
+      summary: Ajouter un nouveau professeur
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nom:
+                  type: string
+                nom_matière:
+                  type: string
+                code_matière:
+                  type: string
+                durée_matière:
+                  type: string
+      responses:
+        '200':
+          description: Succès
+          content:
+            application/json:
+              example:
+                message: Professeur ajouté avec succès
+        '500':
+          description: Erreur serveur
+          content:
+            text/plain:
+              example: Une erreur est survenue lors du traitement de la requête.
+
